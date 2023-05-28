@@ -1,12 +1,15 @@
 import css from './ImageGalleryItem.module.css';
 
-const ImageGalleryItem = props => {
-  console.log(props);
+const ImageGalleryItem = ({ image: { webformatURL, tags }, onClick }) => {
   return (
     <li className={css.imageGalleryItem}>
-      <img src="" alt="" />
+      <img
+        className={css.imageGalleryItem_image}
+        src={webformatURL}
+        alt={tags}
+        onClick={onClick}
+      />
     </li>
   );
 };
-
 export default ImageGalleryItem;

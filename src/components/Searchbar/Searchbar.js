@@ -1,39 +1,39 @@
 import { Component } from 'react';
-import css from './Searchbar.module.css'
+import css from './Searchbar.module.css';
 
 class SearchBar extends Component {
-
   state = {
     searchQuery: '',
   };
 
   hendleInputChange = e => {
-    const {name, value} = e.currentTarget
-    this.setState({[name]: value.toLowerCase()});
+    const { name, value } = e.currentTarget;
+    this.setState({ [name]: value.toLowerCase() });
   };
 
-  hendleSubmit = e =>{
+  hendleSubmit = e => {
     e.preventDefault();
 
-    if(this.state.searchQuery.trim() === ''){
+    if (this.state.searchQuery.trim() === '') {
+      alert('Please enter, what exactly you want to find');
       return;
     }
-    
+
     this.props.onSubmit(this.state.searchQuery);
-    this.setState({searchQuery: ''})
+    this.setState({ searchQuery: '' });
   };
 
-  render (){
+  render() {
     return (
       <header className={css.searchbar}>
         <form className={css.form} onSubmit={this.hendleSubmit}>
           <button type="submit" className={css.button}>
             <span className="button-label">Search</span>
           </button>
-      
+
           <input
             onChange={this.hendleInputChange}
-            name='searchQuery'
+            name="searchQuery"
             value={this.state.searchQuery}
             className={css.input}
             type="text"
@@ -41,8 +41,8 @@ class SearchBar extends Component {
           />
         </form>
       </header>
-    )
-  };
-};
+    );
+  }
+}
 
 export default SearchBar;
