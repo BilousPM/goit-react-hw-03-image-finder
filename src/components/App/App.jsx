@@ -8,6 +8,7 @@ import ImageGallery from '../ImageGallery/ImageGallery';
 import Loader from '../Loader/Loader';
 import Btn from '../Button/Button';
 import Modal from '../Modal/Modal';
+import css from '../App/App.module.css';
 
 class App extends Component {
   state = {
@@ -73,18 +74,17 @@ class App extends Component {
     }));
   };
 
-  // renderModalImg = () => {
-  //   const modalImg = pictures.find(image => {
-  //     image.id === selectedImage;
-  //   });
-  //   if (!selectedImage) return;
-  // };
-  // const image.largeImageURL = modalImg
-
   render() {
-    const { pictures, isLoading, errorMesage, showBtn, showModal } = this.state;
+    const {
+      pictures,
+      isLoading,
+      errorMesage,
+      showBtn,
+      showModal,
+      selectedImage,
+    } = this.state;
     return (
-      <div>
+      <div className={css.app}>
         <Searchbar onSubmit={this.formSubmitHendler} />
         {isLoading && <Loader />}
         {errorMesage && <h2>{errorMesage}</h2>}
@@ -93,9 +93,11 @@ class App extends Component {
         )}
         {showBtn && <Btn onClick={this.hendleLoadMore} />}
         {showModal && (
-          <Modal onClick={this.toggleModal}>
-            {/* <img scr={this.largeImageURL} /> */}
-          </Modal>
+          <Modal
+            onClick={this.toggleModal}
+            selectedImage={selectedImage}
+            data={pictures}
+          />
         )}
       </div>
     );
