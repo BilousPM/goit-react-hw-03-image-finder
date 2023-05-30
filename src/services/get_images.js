@@ -1,5 +1,4 @@
 const BASE_URL = 'https://pixabay.com/api/';
-// const API_KEY = '34841382-75c0b952d5537088e5e81e69b';
 const API_KEY = '34841382-75c0b952d5537088e5e81e69b';
 export const PER_PAGE = 12;
 
