@@ -26,25 +26,32 @@ class App extends Component {
   componentDidUpdate(_, prevState) {
     const page = this.state.page;
     const query = this.state.queryValue;
-    const pictures = this.state.pictures;
+    // const pictures = this.state.pictures;
 
     if (prevState.queryValue !== query || prevState.page !== page) {
       this.setState({ isLoading: true });
       getImages(query, page)
-        .then(res => res.json())
+        // .then(res => res.json())
         .then(images =>
           this.setState({
-            pictures: images.hits,
+            pictures: [...prevState.pictures, ...images.hits],
             showBtn: page < Math.ceil(images.totalHits / PER_PAGE),
           })
         )
-        .then(images =>
-          this.setState(prevState => {
-            return {
-              pictures: [...pictures, ...prevState.pictures],
-            };
-          })
-        )
+
+        // .then(images =>
+        //   this.setState({
+        //     pictures: images.hits,
+        //     showBtn: page < Math.ceil(images.totalHits / PER_PAGE),
+        //   })
+        // )
+        // .then(images =>
+        //   this.setState(prevState => {
+        //     return {
+        //       pictures: [...pictures, ...prevState.pictures],
+        //     };
+        //   })
+        // )
         .catch(eror => {
           this.setState({ errorMesage: 'Something went wrong' });
         })
@@ -58,6 +65,7 @@ class App extends Component {
     this.setState({
       queryValue: searchQuery,
       pictures: [],
+      page: 1,
     });
   };
 
